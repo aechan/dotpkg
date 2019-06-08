@@ -1,0 +1,30 @@
+{
+  "name": "dotpkg",
+  "version": "1.0.0",
+  "description": "Package manager for UNIX desktop configurations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc -w",
+    "start": "node ./dist/main.js",
+    "lint": "tslint --project ."
+  },
+  "author": "Alec Chan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cli-progress": "^1.8.1",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^12.0.7",
+    "nodemon": "^1.19.1",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typescript": "^3.5.1"
+  },
+  "dependencies": {
+    "@types/nodegit": "^0.24.8",
+    "cli-progress": "^2.1.1",
+    "commander": "^2.20.0",
+    "mkdirp": "^0.5.1",
+    "nodegit": "^0.24.3",
+    "tslint": "^5.17.0"
+  }
+}
