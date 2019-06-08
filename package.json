@@ -4,7 +4,7 @@
   "description": "Package manager for UNIX desktop configurations.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "unittest": "mocha -r ts-node/register tests/unit/*.ts",
     "watch": "tsc -w",
     "build": "tsc",
     "start": "node ./dist/main.js",
@@ -13,10 +13,15 @@
   "author": "Alec Chan",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
     "@types/cli-progress": "^1.8.1",
     "@types/mkdirp": "^0.5.2",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.0.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
+    "ts-node": "^8.2.0",
     "tslint-microsoft-contrib": "^6.2.0",
     "typescript": "^3.5.1"
   },

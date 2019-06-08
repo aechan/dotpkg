@@ -25,6 +25,9 @@ jobs: # a collection of steps
       - run:
           name: does-run
           command: npm start
+      - run:
+          name: unit-tests
+          command: npm run unittest
       #- run: # run tests
       #    name: test
       #    command: npm test
