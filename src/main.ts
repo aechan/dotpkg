@@ -12,7 +12,9 @@ class App {
 
     parseArgs() {
         commander.version(CONFIG.version, '-v, --version')
-            .option('-h, --help', 'Display help');
+            .option('-h, --help', 'Display help')
+            .name('dotpkg');
+            
         let needHelp = true;
         commander.command('install <pkg>')
             .description('Install given package from GitHub URL or by name.')
