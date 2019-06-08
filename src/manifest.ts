@@ -1,3 +1,5 @@
+import { fstat } from "fs";
+
 export class Manifest {
     private _version: string;
     private _name: string;
@@ -95,6 +97,7 @@ export class Manifest {
         if (msg) {
             console.error(msg);
         }
+        
         return false;
     }
 

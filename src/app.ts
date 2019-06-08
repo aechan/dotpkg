@@ -15,20 +15,13 @@ export class App {
             .option('-h, --help', 'Display help')
             .name('dotpkg');
             
-        let needHelp = true;
         commander.command('install <pkg>')
             .description('Install given package from GitHub URL or by name.')
             .action((pkg: string) => {
-                needHelp = true;
                 this.installPkg(pkg);
             });
 
         commander.parse(args);
-        if (needHelp) {
-            commander.help();
-        }
-
-        return commander.opts();
     }
 
     private installPkg(pkg: string) {

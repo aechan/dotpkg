@@ -5,6 +5,7 @@ import { Manifest } from './manifest';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import fs from 'fs';
+import fsExtra, { mkdirpSync } from 'fs-extra';
 
 type progressListener = (progress: number) => void;
 
@@ -43,18 +44,29 @@ export class Installer {
     private installRepo(repo: string) {
         Clone.clone(repo, this.tempPath).then((repo) => {
             this.updateProgressListeners(30);
-            this.manifest = Manifest.parseManifest(fs.readFileSync(path.join(this.tempPath, 'ricemanifest.json')));
+            const file = fs.readFileSync(path.join(this.tempPath, 'dotmanifest.json')).toString();
+            this.manifest = Manifest.parseManifest(JSON.parse(file));
             this.updateProgressListeners(35);
             if (this.manifest.valid) {
                 this.doLocalInstall();
+            } else {
+                fsExtra.removeSync(this.tempPath);
             }
+        }).catch((err) => {
+            fsExtra.removeSync(this.tempPath);
+            console.error(err);
+            process.exit(-1);
         });
     }
 
     private doLocalInstall() {
         if (!this.manifest) return false;
         const pkgPath = path.join(CONFIG.installPath, this.manifest.name);
-        fs.mkdirSync(pkgPath);
+        if (fs.existsSync(pkgPath)) {
+            fsExtra.removeSync(pkgPath);
+        } else {
+            mkdirpSync(pkgPath);
+        }
         this.updateProgressListeners(50);
         fs.renameSync(this.tempPath, pkgPath);
         this.updateProgressListeners(75);
